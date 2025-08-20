@@ -1,7 +1,7 @@
 const caixaPrincipal = document.querySelector(".caixa-principal");
-const caixaPerguntas = document.querySelector(".caixa-pergunta");
-const caixaAlternativas = document.querySelector (".caixa-alternativas");
-const textoResultado =  document.querySelector (".texto-resultado");
+const caixaPerguntas =  document.querySelector(".caixa-pergunta");
+const caixaAlternativas = document.querySelector(".caixa-alternativas");
+const textoResultado = document.querySelector(".texto-resultado");
 
 const perguntas = [
     {
@@ -10,11 +10,11 @@ const perguntas = [
       alternativas: [
           {
               texto:"Isso é assustador!",
-              afirmacao: "afirmacao"
+              afirmacao: "isso e muito mesmo"
           },
           {
               texto:"Isso é maravilhoso!",
-              afirmacao: "afirmacao"
+              afirmacao: "muito"
           }  
       ],
     },
@@ -24,11 +24,11 @@ const perguntas = [
       alternativas: [
               {
                   texto:  "Utiliza uma ferramenta de busca na internet que utiliza IA para que ela ajude a encontrar informações relevantes para o trabalho e explique numa linguagem que facilite o entendimento.",
-                  afirmacao:"afirmacao"
+                  afirmacao:"isso e muito bom"
               },
               {
                   texto:  "Escreve o trabalho com base nas conversas que teve com colegas, algumas pesquisas na internet e conhecimentos próprios sobre o tema.",
-                  afirmacao: "afirmacao"
+                  afirmacao: "ruim"
               }  
       ],
     },
@@ -38,11 +38,11 @@ const perguntas = [
       alternativas: [
           {
               texto:  "Defende a ideia de que a IA pode criar novas oportunidades de emprego e melhorar habilidades humanas.",
-              afirmacao: "afirmacao"
+              afirmacao: "maravilhoso"
           },
           {
               texto:  "Me preocupo com as pessoas que perderão seus empregos para máquinas e defendo a importância de proteger os trabalhadores.",
-              afirmacao: "afirmacao"
+              afirmacao: "negativo"
           }    
       ],
     },
@@ -52,11 +52,11 @@ const perguntas = [
       alternativas: [
           {
               texto: "Criar uma imagem utilizando uma plataforma de design como o Paint.",
-              afirmacao: "afirmacao"
+              afirmacao: "muito bom"
           },
           {
               texto: "Criar uma imagem utilizando um gerador de imagem de IA.",
-              afirmacao: "afirmacao"
+              afirmacao: "chato"
           }    
       ],
     },
@@ -66,50 +66,50 @@ const perguntas = [
       alternativas: [
           {
               texto:  "Escrever comandos para o chat é uma forma de contribuir com o trabalho, por isso não é um problema utilizar o texto inteiro.",
-              afirmacao: "afirmacao"
+              afirmacao: "ruim"
           },
           {
               texto: "O chat pode ser uma tecnologia muito avançada, mas é preciso manter a atenção pois toda máquina erra, por isso revisar o trabalho e contribuir com as perspectivas pessoais é essencial.",
-              afirmacao: "afirmacao"
+              afirmacao: "muito bom"
           }    
       ]
     },
   ];
-  
-  let atual = 0;
+
+  let  atual = 0;
   let perguntaAtual;
   let historiaFinal = "";
-  function mostraPergunta (){
+
+  function mostraPergunta(){
     if(atual >= perguntas.length){
       mostraResultado();
       return;
     }
-    perguntaAtual= perguntas[atual];
+    perguntaAtual = perguntas[atual];
     caixaPerguntas.textContent = perguntaAtual.enunciado;
-    caixaAlternativas.textContent = "";
     mostraAlternativas();
   }
 
   function mostraAlternativas(){
-    for(const alternativa of perguntaAtual.alernativas){
+    for(const alternativa of perguntaAtual.alternativas){
       const botaoAlternativa = document.createElement("button");
       botaoAlternativa.textContent = alternativa.texto;
-      botaoAlternativa.addEventlistener("click", () => respostaSelecionada
-      (alternativa));
-      caixaAlternativas.appendChild(botaoAlternativa);
+      botaoAlternativa.addEventListener("click", () => respostaSelecionada(alternativa));
+       caixaAlternativas.appendChild(botaoAlternativa);
+      }
     }
-  }
 
-   function respostaSelecionada (opcaoSelecionada){
-    const afirmacoes = opcaoSelecionada.afirmacao;
-    historiaFinal += afirmacoes + "";
-    atual++;
-    mostraPergunta();
-
-   }
-  
-function mostraResultado(){
-  caixaPerguntas.textContent = "Em 2049...";
-  textoResultado
+ function respostaSelecionada(opcaoSelecionada) {
+  const afirmacoes = opcaoSelecionada.afirmacoes;
+  historiaFinal += afirmacoes + " ";
+  atual++;
+  mostraPergunta();
 }
-  mostraPergunta()
+  
+
+    function mostraResultado() {
+      caixaPerguntas.textContent = "Em 2049...";
+      textoResultado.textContent = historiaFinal;
+      caixaAlternativas.textContent = "";
+    }
+    mostraPergunta();
